@@ -29,6 +29,7 @@ public class ComputerController : Controller
 
     public IActionResult Delete(int id){
         _context.Computers.Remove(_context.Computers.Find(id));
+        _context.SaveChanges();
         return View();
     }
 
@@ -43,6 +44,7 @@ public class ComputerController : Controller
         {
             Computer computer = new Computer(id,ram,processor);
             _context.Computers.Add(computer);
+            _context.SaveChanges();
             return RedirectToAction("Create");
         }
         else
@@ -63,6 +65,8 @@ public class ComputerController : Controller
         {
             computer.Ram = ram;
             computer.Processor = processor;
+            _context.Computers.Update(computer);
+            _context.SaveChanges();
 
             return Content("Atualizado com sucesso");
         }
