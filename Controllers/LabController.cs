@@ -66,7 +66,7 @@ public class LabController : Controller
             lab.Number = number;
             lab.Name = name;
             lab.Sector = sector;
-
+             _context.Labs.Update(lab);
              _context.SaveChanges();
             return Content("Atualizado com sucesso");
         }

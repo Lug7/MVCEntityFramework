@@ -63,13 +63,17 @@ public class ComputerController : Controller
         }
         else
         {
-            computer.Ram = ram;
-            computer.Processor = processor;
-            _context.Computers.Update(computer);
-            _context.SaveChanges();
-
-            return Content("Atualizado com sucesso");
+            return View(computer);
         }
 
+    }
+    
+    public IActionResult Updating([FromForm] int id, [FromForm] string ram, [FromForm] string processor){
+        Computer computer = _context.Computers.Find(id);
+        
+        computer.Ram = ram;
+        computer.Processor = processor;
+        _context.SaveChanges();
+        return RedirectToAction("Index");
     }
 }
